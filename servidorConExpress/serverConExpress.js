@@ -33,40 +33,52 @@ class Contenedor {
       }
       await fs.promises.writeFile(this.archivo, JSON.stringify(array, null, 2));
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   }
 
   async save(objeto) {
-    const array = await this.getAll();
-    let idMax = 0;
-    for (let obj of array) {
-      if (obj.id > idMax) {
-        idMax = obj.id;
+    try {
+      const array = await this.getAll();
+      let idMax = 0;
+      for (let obj of array) {
+        if (obj.id > idMax) {
+          idMax = obj.id;
+        }
       }
+      const newId = idMax + 1;
+      await this.write(array, objeto, idMax + 1);
+      return newId;
+    } catch (error) {
+      throw new Error(error.message);
     }
-    await this.write(array, objeto, idMax + 1);
-    const retorno = idMax + 1;
-    return retorno;
   }
 
   async deleteById(id) {
-    const array = await this.getAll();
-    const newArray = array.filter((item) => item.id != id);
-    await this.write(newArray);
+    try {
+      const array = await this.getAll();
+      const newArray = array.filter((item) => item.id != id);
+      await this.write(newArray);
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   async deleteAll() {
-    this.write([])
+    try {
+      this.write([]);
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 }
 
 const rndArray = (array) => {
   return 1 + parseInt(Math.random() * array.length);
-}
+};
 const productos = new Contenedor("productos.txt");
 
-const express = require('express');
+const express = require("express");
 
 const app = express();
 
@@ -76,13 +88,13 @@ const server = app.listen(PORT, () => {
   console.log(`Servidor http escuchado en el puerto ${server.address().port}`);
 });
 
-app.get('/productos', (req, res) => {
-    productos.getAll().then((array) => res.send(array));
-})
+app.get("/productos", (req, res) => {
+  productos.getAll().then((array) => res.send(array));
+});
 
-app.get('/productoRandom', (req, res) => {
-    let index = productos.getAll().then((array) => rndArray(array));
-    index.then((ind) => productos.getById(ind).then((item) => res.send(item)));
-})
+app.get("/productoRandom", (req, res) => {
+  let index = productos.getAll().then((array) => rndArray(array));
+  index.then((ind) => productos.getById(ind).then((item) => res.send(item)));
+});
 
 server.on("error", (error) => console.log(error));
