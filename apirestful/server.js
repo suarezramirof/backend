@@ -1,3 +1,8 @@
+const Contenedor = require("./contenedor.js"); // Clase
+let productos = require("./productos.json"); // Array inicial de ejemplo
+
+const products = new Contenedor(productos);
+
 // Express
 
 const express = require("express");
@@ -21,146 +26,49 @@ server.on("error", (error) => {
 const productosRouter = express.Router();
 app.use("/api/productos", productosRouter);
 
-// Array
-
-let productos = [
-  {
-    title: "Globo terráqueo",
-    price: 200,
-    thumbnail: "https://www.fillmurray.com/640/360",
-    id: 1,
-  },
-  {
-    title: "Escuadra",
-    price: 50,
-    thumbnail: "https://www.fillmurray.com/640/358",
-    id: 2,
-  },
-  {
-    title: "Calculadora",
-    price: 150,
-    thumbnail: "https://www.fillmurray.com/638/360",
-    id: 3,
-  },
-];
-
-// Contenedor
-
-class Contenedor {
-  constructor(productos) {
-    this.productos = productos;
-  }
-
-  getAll() {
-    try {
-      return this.productos;
-    } catch {
-      throw new Error("Error del servidor");
-    }
-  }
-
-  getItemById = (id) => {
-    if (isNaN(id)) {
-      throw new Error("Ingrese un id numérico");
-    }
-    try {
-      const [item] = this.productos.filter((elem) => elem.id == id);
-      if (!item) {
-        return { error: "producto no encontrado" };
-      }
-      return item;
-    } catch {
-      throw new Error("Error en el servidor");
-    }
-  };
-
-  addItem = (producto) => {
-    if (!producto.title || !producto.price || !producto.thumbnail) {
-      throw new Error("Ingrese los datos del producto correctamente");
-    }
-    try {
-      let idMax = 0;
-      for (let item of productos) {
-        if (item.id > idMax) {
-          idMax = item.id;
-        }
-      }
-      const newId = idMax + 1;
-      productos.push({ ...producto, id: newId });
-      return { ...producto, id: newId };
-    } catch {
-      throw new Error("Error al agregar producto");
-    }
-  };
-
-  updateItem = (id, { title, price, thumbnail }) => {
-    if (isNaN(id)) {
-      throw new Error("Ingrese un id numérico");
-    }
-    let idValido = false;
-    for (let item of productos) {
-      if (Object.values(item).includes(parseInt(id))) {
-        idValido = true;
-      }
-    }
-    if (!idValido) {
-      return { error: "producto no encontrado" };
-    }
-    try {
-      productos = productos.map((item) =>
-        item.id == id
-          ? {
-              title: title ? title : item.title,
-              price: price ? price : item.price,
-              thumbnail: thumbnail ? thumbnail : item.thumbnail,
-              id,
-            }
-          : item
-      );
-      return productos.filter((item) => item.id == id);
-    } catch {
-      throw new Error("Error al actualizar el producto");
-    }
-  };
-
-  deleteItemById = (id) => {
-    if (isNaN(id)) {
-      throw new Error("Ingrese un id númerico");
-    }
-    if (!productos.filter((elem) => elem.id == id)[0]) {
-      return { error: "producto no encontrado" };
-    }
-    productos = productos.filter((item) => item.id != id);
-    return productos;
-  };
-}
-
-
-
-const products = new Contenedor(productos);
-// API
+// Rutas
 
 productosRouter.get("/", (_req, res) => {
-  res.json(products.getAll());
+  try {
+    res.json(products.getAll());
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 productosRouter.get("/:id", (req, res) => {
-  const { id } = req.params;
-  res.json(products.getItemById(id));
+  try {
+    const { id } = req.params;
+    res.json(products.getItemById(id));
+  } catch (error) {
+    res.status(error.code ? error.code : 500).json({ error: error.message });
+  }
 });
 
 productosRouter.post("/", (req, res) => {
-  const producto = req.body;
-  res.json(products.addItem(producto));
+  try {
+    const producto = req.body;
+    res.json(products.addItem(producto));
+  } catch (error) {
+    res.status(error.code ? error.code : 500).json({ error: error.message });
+  }
 });
 
 productosRouter.put("/:id", (req, res) => {
-  const { id } = req.params;
-  const { title, price, thumbnail } = req.body;
-  res.json(products.updateItem(id, { title, price, thumbnail }));
+  try {
+    const { id } = req.params;
+    const { title, price, thumbnail } = req.body;
+    res.json(products.updateItem(id, { title, price, thumbnail }));
+  } catch (error) {
+    res.status(error.code ? error.code : 500).json({ error: error.message });
+  }
 });
 
 productosRouter.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  res.json(products.deleteItemById(id));
+  try {
+    const { id } = req.params;
+    res.json(products.deleteItemById(id));
+  } catch (error) {
+    res.status(error.code ? error.code : 500).json({ error: error.message });
+  }
 });

@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Globo terráqueo",
+        "price": 200,
+        "thumbnail": "https://www.fillmurray.com/640/360",
+        "id": 1
+    },
+    {
+        "title": "Escuadra",
+        "price": 50,
+        "thumbnail": "https://www.fillmurray.com/640/358",
+        "id": 2
+    },
+    {
+        "title": "Calculadora",
+        "price": 150,
+        "thumbnail": "https://www.fillmurray.com/638/360",
+        "id": 3
+    }
+]
