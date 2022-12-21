@@ -1,0 +1,19 @@
+<%- include('../partials/head') %>
+<table>
+  <tr>
+    <th>Producto</th>
+    <th>Precio</th>
+    <th>Foto</th>
+  </tr>
+  <% for(let i = 0; i < productos.length; i++) { %>
+  <tr>
+    <td><%= productos[i].title %></td>
+    <td><%= productos[i].price %></td>
+    <td><img class="thumbnail" src=<%=productos[i].thumbnail %> /></td>
+  </tr>
+  <% } %>
+</table>
+
+<button><a href="/">Cargar producto</a></button>
+</body>
+</html>
