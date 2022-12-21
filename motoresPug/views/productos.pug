@@ -1,0 +1,17 @@
+extends layouts/index.pug
+
+block productos
+  table
+    tr
+      th Producto
+      th Precio
+      th Foto
+    each val in productos
+      tr
+        td=val.title
+        td=val.price
+        td
+          img(class="thumbnail" src=val.thumbnail alt=val.title)
+
+  button
+    a(href="/") Cargar producto

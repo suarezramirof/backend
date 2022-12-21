@@ -1,0 +1,14 @@
+extends layouts/index.pug
+
+block form
+  h2 Ingrese datos del producto
+  form(action="/productos" method="post")
+    label(for="title") Producto
+    input(type="text" name="title" id="title")
+    label(for="price") Precio
+    input(type="number" name="price" id="price")
+    label(for="thumbnail") Imágen
+    input(type="text" name="thumbnail" id="thumbnail")
+    button Enviar
+  button
+    a(href="/productos") Ver los productos
