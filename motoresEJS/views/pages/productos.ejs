@@ -1,4 +1,5 @@
 <%- include('../partials/head') %>
+<% if(productos.length > 0) { %>
 <table>
   <tr>
     <th>Producto</th>
@@ -13,7 +14,9 @@
   </tr>
   <% } %>
 </table>
-
+<% } else { %>
+  <p class="msj">No hay productos</p>
+<% } %>
 <button><a href="/">Cargar producto</a></button>
 </body>
 </html>
