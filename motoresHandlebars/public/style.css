@@ -1,0 +1,50 @@
+.thumbnail {
+    width: 4rem;
+    height: 4rem;
+}
+
+th {
+    border-bottom: 3px solid black;
+}
+
+td {
+    border-bottom: 2px solid black;
+    text-align: center;
+    padding: 5px 1rem;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+@media(max-width: 600px) {
+    table {
+        min-width: 90%;
+    }
+}
+
+form {
+    max-width: 20rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+button {
+    margin: 2rem auto auto auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.msj {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
