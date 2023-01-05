@@ -1,0 +1,111 @@
+@media (min-width: 900px) {
+  body {
+    display: flex;
+    align-items: baseline;
+    justify-content:space-evenly;
+  }
+  #seccion-mensajes {
+    width: 30rem;
+  }
+}
+
+.thumbnail {
+  width: 3rem;
+  height: 3rem;
+}
+
+th {
+  border-bottom: 3px solid black;
+}
+
+td {
+  border-bottom: 2px solid black;
+  text-align: center;
+  padding: 5px 1rem;
+}
+
+table {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+#seccion-productos form {
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+#seccion-productos label {
+  text-align: center;
+}
+
+button {
+  margin: 1rem auto auto auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.msj {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+.e-mail {
+  font-weight: bold;
+  color: blue;
+}
+
+.fecha {
+  color: brown;
+}
+
+.mensaje {
+  font-style: italic;
+  color: green;
+}
+
+#mensajes {
+  max-height: 50%;
+  overflow: auto;
+  box-shadow: 0 0 10px 0 lightgray;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+}
+
+#mail{
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+#msj {
+  margin-top: 0.75rem;
+  width: 100%;
+  resize: vertical;
+}
+
+@media (max-width: 900px) {
+  table {
+    min-width: 20rem;
+  }
+  #seccion-productos {
+    margin: auto;
+  }
+  #seccion-mensajes {
+    margin: auto;
+    max-width: 30rem;
+  }
+  #mensajes {
+    max-height: 20%;
+  }
+  #seccion-productos form {
+    margin: auto;
+  }
+}
