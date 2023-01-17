@@ -1,0 +1,65 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat websocket</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  </head>
+  <body>
+    <div class="seccion" id="seccion-productos">
+      <h2>Ingrese producto</h2>
+      <form onsubmit="return cargarProducto(this)">
+        <label for="title">Producto</label
+        ><input
+          required
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Ingrese el producto"
+        />
+        <label for="price">Precio</label
+        ><input
+          required
+          type="number"
+          id="price"
+          name="price"
+          placeholder="Ingrese el precio"
+        />
+        <label for="thumbnail">Imagen</label
+        ><input
+          required
+          type="url"
+          id="thumbnail"
+          name="thumbnail"
+          placeholder="Ingrese la url de la imagen"
+        />
+        <button type="submit">Cargar</button>
+      </form>
+      <div id="productos"></div>
+    </div>
+    <div class="seccion" id="seccion-mensajes">
+      <h2>Centro de mensajes</h2>
+      <form onsubmit="return enviarMensaje()">
+        <input
+          type="email"
+          required
+          id="mail"
+          name="mail"
+          placeholder="Ingrese su email"
+        />
+        <div id="mensajes"></div>
+        <textarea
+          id="msj"
+          name="msj"
+          required
+          placeholder="Ingresa tu mensaje"
+        ></textarea>
+        <button type="submit">Enviar mensaje</button>
+      </form>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
