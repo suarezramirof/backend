@@ -21,6 +21,8 @@ class SqlProducts {
         .then(() => {
           return this.agregarProducto(sample);
         });
+    } else {
+      return false;
     }
   }
 

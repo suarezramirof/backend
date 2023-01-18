@@ -11,6 +11,8 @@ export async function crearProductos() {
             .crearTabla(sampleProducts);
         if (res) {
             console.log("Productos de ejemplo cargados");
+        } else {
+            console.log("Tabla con productos existente");
         }
     } catch (error) {
         console.log(error);

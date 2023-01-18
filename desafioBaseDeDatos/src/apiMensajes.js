@@ -17,6 +17,8 @@ class SqlMensajes {
         .then(() => {
           return this.cargarMensaje(datos);
         });
+    } else {
+      return false;
     }
   }
 

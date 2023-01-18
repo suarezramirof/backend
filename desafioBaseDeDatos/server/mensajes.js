@@ -6,10 +6,9 @@ const mensajes = new SqlMensajes(sqlite3);
 
 export async function crearMensajes() {
   try {
-    const res = await mensajes
-      .crearTabla(sampleMessages);
-    if (res)
-      console.log("Mensajes de ejemplo cargados");
+    const res = await mensajes.crearTabla(sampleMessages);
+    if (res) console.log("Mensajes de ejemplo cargados");
+    else console.log("Tabla con mensajes existente");
   } catch (error) {
     return console.log(error);
   }
