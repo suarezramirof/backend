@@ -14,10 +14,14 @@ const schema = normalizr.schema;
 const user = new schema.Entity("author");
 const schemaMensajes = new schema.Entity("mensajes", { author: user });
 
-// Funciones 
+// Funciones
 
 function denormalizar(dataNormalizada) {
-  const data = normalizr.denormalize(dataNormalizada.result, [schemaMensajes], dataNormalizada.Entity);
+  const data = normalizr.denormalize(
+    dataNormalizada.result,
+    [schemaMensajes],
+    dataNormalizada.entities
+  );
   const largoNormalizado = JSON.stringify(dataNormalizada).length;
   const largoOriginal = JSON.stringify(data).length;
   const compresion = Math.round((largoNormalizado / largoOriginal) * 100);
@@ -92,5 +96,3 @@ socket.on(keys.nuevoMensaje, (mensajesNormalizados) => {
 socket.on("error", ({ error, status }) => {
   alert(`Error: ${error}. Código: ${status}`);
 });
-
-
