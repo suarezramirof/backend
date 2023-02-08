@@ -1,18 +1,6 @@
-import {
-  mostrarProductos,
-  crearProductos,
-  cargarProducto,
-} from "./server/productos.js";
-
-import {
-  crearMensajes,
-  verMensajes,
-  agregarMensaje,
-} from "./server/mensajes.js";
-
-// Creación de tablas de no existir
-await crearProductos();
-await crearMensajes();
+import controladorMensajes from "./src/controllers/controladorMensajes.js";
+import { routerProductos } from "./src/routes/RouterProductos.js";
+import keys from "./src/ws_keys.js";
 
 // Express
 import express from "express";
@@ -22,8 +10,9 @@ app.get("/", (_req, res) => {
   res.sendFile("index.html", { root: __dirname });
 });
 
+app.use("/api", routerProductos);
+
 // Socket io
-import keys from "./src/ws_keys.js";
 import { createServer } from "http";
 const httpServer = createServer(app);
 import { Server } from "socket.io";
@@ -31,26 +20,11 @@ const io = new Server(httpServer);
 
 io.on("connection", (socket) => {
   console.log(`Nuevo cliente conectado en socket: ${socket.id}`);
-  verMensajes().then((mensajes) => {
-    socket.emit(keys.nuevoMensaje, mensajes);
-  });
-  mostrarProductos().then((productos) =>
-    socket.emit(keys.nuevoProducto, productos)
+  controladorMensajes.verMensajes(socket);
+  socket.emit(keys.nuevoProducto);
+  socket.on(keys.enviarMensaje, (msj) =>
+    controladorMensajes.cargarMensaje(msj, io)
   );
-  socket.on(keys.cargarProducto, (datos) => {
-    cargarProducto(datos).then(() => {
-      mostrarProductos().then((productos) =>
-        socket.emit(keys.nuevoProducto, productos)
-      );
-    });
-  });
-  socket.on(keys.enviarMensaje, (msj) => {
-    agregarMensaje(msj).then(() => {
-      verMensajes().then((mensajes) =>
-        socket.emit(keys.nuevoMensaje, mensajes)
-      );
-    });
-  });
 });
 
 // Servidor
@@ -61,3 +35,5 @@ const server = httpServer.listen(PORT, () => {
 server.on("error", (error) => {
   console.log(`Error en el servidor: ${error}`);
 });
+
+export default io;

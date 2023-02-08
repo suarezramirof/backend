@@ -1,5 +1,4 @@
 const socket = io.connect();
-
 const keys = {
   productos: "productos",
   nuevoProducto: "nuevoProducto",
@@ -9,19 +8,27 @@ const keys = {
   enviarMensaje: "enviarMensaje",
 };
 
-// updateProductos();
+// Normalizr
 
-function cargarProducto(e) {
-  const producto = {
-    nombre: document.getElementById("title").value,
-    precio: parseFloat(document.getElementById("price").value),
-    foto: document.getElementById("thumbnail").value,
-  };
-  socket.emit(keys.cargarProducto, producto);
-  document.getElementById("title").value = "";
-  document.getElementById("price").value = "";
-  document.getElementById("thumbnail").value = "";
-  return false;
+const schema = normalizr.schema;
+const user = new schema.Entity("author");
+const schemaMensajes = new schema.Entity("mensajes", { author: user });
+
+// Funciones 
+
+function denormalizar(dataNormalizada) {
+  const data = normalizr.denormalize(dataNormalizada.result, [schemaMensajes], dataNormalizada.Entity);
+  const largoNormalizado = JSON.stringify(dataNormalizada).length;
+  const largoOriginal = JSON.stringify(data).length;
+  const compresion = Math.round((largoNormalizado / largoOriginal) * 100);
+  showCompresion(compresion);
+  return data;
+}
+
+function showCompresion(compresion) {
+  document.getElementById(
+    "compresion"
+  ).innerText = `(Compresión: ${compresion}%)`;
 }
 
 function enviarMensaje() {
@@ -29,26 +36,21 @@ function enviarMensaje() {
   const fecha = fechaHora.toLocaleDateString();
   const hora = fechaHora.toLocaleTimeString();
   const mensaje = {
-    email: document.getElementById("mail").value,
-    msj: document.getElementById("msj").value,
+    author: {
+      id: document.getElementById("mail").value,
+      nombre: document.getElementById("nombre").value,
+      apellido: document.getElementById("apellido").value,
+      edad: document.getElementById("edad").value,
+      alias: document.getElementById("alias").value,
+      avatar: document.getElementById("avatar").value,
+    },
+    texto: document.getElementById("msj").value,
     date: fecha + " " + hora,
   };
   socket.emit(keys.enviarMensaje, mensaje);
   document.getElementById("msj").value = "";
   return false;
 }
-
-socket.on(keys.nuevoProducto, (productos) => {
-  updateProductos({ items: productos });
-});
-
-socket.on(keys.nuevoMensaje, (mensajes) => {
-  updateMensajes({ msjs: mensajes });
-});
-
-socket.on("error", ({ error, status }) => {
-  alert(`Error: ${error}. Código: ${status}`);
-});
 
 function updateProductos(datos) {
   fetch("views/partials/productos.hbs")
@@ -71,3 +73,24 @@ function updateMensajes(msjs) {
       div.lastElementChild.scrollIntoView({ behavior: "smooth" });
     });
 }
+
+// WebSocket
+
+socket.on(keys.nuevoProducto, () => {
+  fetch("http://localhost:8080/api/productos-test")
+    .then((res) => res.json())
+    .then((data) => {
+      updateProductos({ items: data });
+    });
+});
+
+socket.on(keys.nuevoMensaje, (mensajesNormalizados) => {
+  const mensajes = denormalizar(mensajesNormalizados);
+  updateMensajes({ msjs: mensajes });
+});
+
+socket.on("error", ({ error, status }) => {
+  alert(`Error: ${error}. Código: ${status}`);
+});
+
+

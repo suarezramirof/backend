@@ -1,7 +1,13 @@
 {{#each msjs}}
-  <p class="chat">
-    <span class="e-mail">{{this.email}} </span>
+  <div class="chat">
+    <span class="e-mail">{{this.author.id}} </span>
     <span class="fecha">[{{this.date}}]: </span>
-    <span class="mensaje">{{this.msj}}</span>
-  </p>
+    <span class="mensaje">{{this.texto}}</span>
+    <div class="avatar"><img
+        src={{this.author.avatar}}
+        alt="Foto de"
+        ,
+        {{this.author.id}}
+      /></div>
+  </div>
 {{/each}}

@@ -1,0 +1,97 @@
+[{
+    "author": {
+        "id": "juanperez@gmail.com",
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "edad": "40",
+        "alias": "juanp",
+        "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/2-Boy-512.png"
+    },
+    "texto": "Hola!",
+    "date": "7/2/2023 22:58:13",
+    "id": 0
+}, {
+    "author": {
+        "id": "pedromartinez@gmail.com",
+        "nombre": "Pedro",
+        "apellido": "Martínez",
+        "edad": "42",
+        "alias": "PM",
+        "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/40-School_boy-512.png"
+    },
+    "texto": "Hola! Cómo andás?",
+    "date": "7/2/2023 22:59:36",
+    "id": 1
+}, {
+    "author": {
+        "id": "martinalvarez@gmail.com",
+        "nombre": "Martín",
+        "apellido": "Álvarez",
+        "edad": "36",
+        "alias": "Tincho",
+        "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/30-Scientist-512.png"
+    },
+    "texto": "Qué hacen tanto tiempo?",
+    "date": "7/2/2023 23:01:44",
+    "id": 2
+}, {
+    "author": {
+        "id": "juanperez@gmail.com",
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "edad": "40",
+        "alias": "juanpe",
+        "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/2-Boy-512.png"
+    },
+    "texto": "Acá andamos.. laburando",
+    "date": "7/2/2023 23:02:56",
+    "id": 3
+}, {
+    "author": {
+        "id": "juanperez@gmail.com",
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "edad": "40",
+        "alias": "juanpe",
+        "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/2-Boy-512.png"
+    },
+    "texto": "Con ganas de que organicemos un asadito!",
+    "date": "7/2/2023 23:03:22",
+    "id": 4
+}, {
+    "author": {
+        "id": "juanperez@gmail.com",
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "edad": "40",
+        "alias": "juanpe",
+        "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/2-Boy-512.png"
+    },
+    "texto": "Que dicen?",
+    "date": "7/2/2023 23:03:40",
+    "id": 5
+}, {
+    "author": {
+        "id": "martinalvarez@gmail.com",
+        "nombre": "Martín",
+        "apellido": "Álvarez",
+        "edad": "36",
+        "alias": "Tincho",
+        "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/30-Scientist-512.png"
+    },
+    "texto": "Yo estoy eeh!",
+    "date": "7/2/2023 23:04:36",
+    "id": 6
+}, {
+    "author": {
+        "id": "pedromartinez@gmail.com",
+        "nombre": "Pedro",
+        "apellido": "Martínez",
+        "edad": "42",
+        "alias": "PM",
+        "avatar": "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/40-School_boy-512.png"
+    },
+    "texto": "Ídem!",
+    "date": "7/2/2023 23:05:30",
+    "id": 7
+}]

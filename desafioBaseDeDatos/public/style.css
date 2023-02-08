@@ -2,7 +2,7 @@
   body {
     display: flex;
     align-items: baseline;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
   }
   #seccion-mensajes {
     width: 30rem;
@@ -33,7 +33,6 @@ table {
   max-width: 20rem;
   display: flex;
   flex-direction: column;
- 
 }
 
 #seccion-productos label {
@@ -58,6 +57,12 @@ h2 {
   text-align: center;
 }
 
+.chat {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 .e-mail {
   font-weight: bold;
   color: blue;
@@ -65,11 +70,23 @@ h2 {
 
 .fecha {
   color: brown;
+  margin-left: 0.25rem;
 }
 
 .mensaje {
   font-style: italic;
   color: green;
+}
+
+.avatar {
+  margin-left: 0.5rem;
+  width: 32px;
+  height: 32px;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
 }
 
 #mensajes {
@@ -80,7 +97,7 @@ h2 {
   padding: 0.25rem;
 }
 
-#mail{
+.input_msjs {
   margin-bottom: 0.75rem;
   width: 100%;
 }
